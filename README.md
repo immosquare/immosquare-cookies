@@ -139,7 +139,7 @@ The default keys used by the gem are:
 
 ## Support & Contribution
 
-For bugs or feature requests, open an issue on [GitHub](#). *(Replace `#` with a link to your gem's GitHub repository issues page.)*
+For bugs or feature requests, open an issue on [GitHub](https://github.com/IMMOSQUARE/immosquare-cookies).
 
 ---
 
