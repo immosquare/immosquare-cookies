@@ -1,4 +1,4 @@
-# ImmSquare Cookies Consent Banner
+# IMMO SQUARE Cookies Consent Banner
 
 This gem provides a simple and customizable way to display a cookie consent banner on your Ruby on Rails application.
 
