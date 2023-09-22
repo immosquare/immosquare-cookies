@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.3] - 2023-09-22
+
+- Adding new locales : en, es, it, nl, zh
+
 ## [0.1.2] - 2023-09-22
 
 - Adding transparency to background-color
