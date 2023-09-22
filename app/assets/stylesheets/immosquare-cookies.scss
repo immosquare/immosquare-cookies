@@ -1,6 +1,6 @@
 #immosquare-cookies-container {
   --immmosquare-cookies-height: 33vh;
-  --immosquare-cookies-bg-color: #f1f1f1;
+  --immosquare-cookies-bg-color: #f1f1f1f0;
   --immosquare-cookies-border-color: #cccccc;
   --immosquare-cookies-border-align: center;
   --immosquare-cookies-btn-color: white;
@@ -25,6 +25,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   height: var(--immmosquare-cookies-height);
   min-height: 200px;
   background-color: var(--immosquare-cookies-bg-color);
