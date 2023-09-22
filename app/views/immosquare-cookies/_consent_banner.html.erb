@@ -30,7 +30,13 @@
         const date = new Date();
         date.setTime(date.getTime() + (365 * 10 * 24 * 60 * 60 * 1000));
         const expires = `;expires=${date.toUTCString()}`;
+        if(!consentGiven){
+          document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+        }
         document.cookie = `${cookieName}=${consentGiven}${expires}; path=/`;
+        if(!consentGiven){
+          window.location.reload();
+        }
     };
     document.getElementById("immosquare-cookies-refuse").addEventListener("click", function() { handleCookieConsent(false); });
     document.getElementById("immosquare-cookies-accept").addEventListener("click", function() { handleCookieConsent(true); });
