@@ -1,0 +1,98 @@
+#immosquare-cookies-container {
+  --immmosquare-cookies-height: 33vh;
+  --immosquare-cookies-bg-color: #f1f1f1;
+  --immosquare-cookies-border-color: #cccccc;
+  --immosquare-cookies-border-align: center;
+  --immosquare-cookies-btn-color: white;
+  --immosquare-cookies-btn-bg-color: green;
+
+  @keyframes immosquare-cookies-effect {
+    33% {
+      transform: translateX(5px);
+    }
+
+    66% {
+      transform: translateX(-5px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  position: fixed;
+  z-index: 1000000;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--immmosquare-cookies-height);
+  min-height: 200px;
+  background-color: var(--immosquare-cookies-bg-color);
+  border-top: 1px solid var(--immosquare-cookies-border-color);
+  display: flex;
+  justify-content: center;
+  align-items: var(--immosquare-cookies-border-align);
+  padding: 1rem 3rem;
+  #immosquare-cookies-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  #immosquare-cookies-refuse {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      animation: immosquare-cookies-effect 0.5s 1;
+    }
+  }
+  #immosquare-cookies-accept {
+    display: inline-block;
+    color: var(--immosquare-cookies-btn-color);
+    background-color: var(--immosquare-cookies-btn-bg-color);
+    border-radius: 2rem;
+    cursor: pointer;
+    padding: 20px;
+    &:hover {
+      animation: immosquare-cookies-effect 0.5s 1;
+    }
+  }
+  #immosquare-cookies-actions {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  section {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+  }
+  @media (max-width: 575.98px) {
+    section {
+      max-width: none;
+    }
+  }
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    section {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    section {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    section {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    section {
+      max-width: 1140px;
+    }
+  }
+}
