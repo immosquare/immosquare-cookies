@@ -60,7 +60,17 @@ Make sure that SASS has access to all of Rails' assets (`Rails.application.confi
 2. Place the Ruby script, `data/compile_sass.rb`, in the appropriate directory:
 
 ```ruby
-[...]
+#!/usr/bin/env ruby
+
+# Require the environment to have access to the application's constants.
+require_relative "../config/environment"
+
+# Create the command to execute with all the application's paths (gems, node_modules, etc.)
+cmd = "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css #{Rails.application.config.assets.paths.map {|path| "--load-path=#{path}" }.join(" ")}"
+cmd += ARGV[0] == "development" ? " --source-map --source-map-urls=absolute --watch" : " --style compressed"
+
+# Execute the command.
+system(cmd)
 ```
 
 3. Update your `Procfile`:
@@ -112,6 +122,14 @@ Option | Default | Description
 ## Internationalization
 
 This gem is i18n-ready. If you don't pass custom text, it will use default translations. Customize translations by adding the appropriate keys to your app's localization files.
+
+The default keys used by the gem are:
+
+- `immosquare-cookies.document_name`
+- `immosquare-cookies.refuse`
+- `immosquare-cookies.accept`
+- `immosquare-cookies.text`
+- `immosquare-cookies.link_text`
 
 ---
 
