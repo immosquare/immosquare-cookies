@@ -101,13 +101,9 @@ Or with a link:
 
 ## 🎥 Demo
 
-For a visual demonstration :
-
-- Check out the image below:
+For a visual demonstration, check out the image below or experience it firsthand by [visiting our website](https://immosquare.com).
   
-  ![Demo](demo.jpg)
-
-- Alternatively, experience it firsthand by [visiting our website](https://immosquare.com).
+![Demo](demo.jpg)
 
 
 ## Customization
