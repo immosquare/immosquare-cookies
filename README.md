@@ -97,7 +97,21 @@ Or with a link:
 ```ruby
 <%= render("immosquare-cookies/consent_banner", :link => "https://legals.immosquare.com") %>
 ```
+
 ---
+
+## 🍪 Conditional Script Loading based on Cookie Consent
+
+If a user has refused the cookie, you might choose not to load certain scripts, such as those from Google Analytics. Here's a simple example using Rails' ERB template:
+
+```erb
+<% if cookies["_immosquare_consented"] != "false" %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-AAAAAAAA"></script>
+<% end %>
+```
+
+In the example above, the Google Analytics script will only be loaded if the user has not explicitly refused the cookies.
+
 
 ## 🎥 Demo
 
