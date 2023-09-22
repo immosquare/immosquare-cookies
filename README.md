@@ -97,10 +97,18 @@ Or with a link:
 ```ruby
 <%= render("immosquare-cookies/consent_banner", :link => "https://legals.immosquare.com") %>
 ```
-
-**Tip:** Check out a preview of the banner [here](#). *(Replace `#` with an actual link to an image or a live preview.)*
-
 ---
+
+## 🎥 Demo
+
+For a visual demonstration :
+
+- Check out the image below:
+  
+  ![Demo](demo.jpg)
+
+- Alternatively, experience it firsthand by [visiting our website](https://immosquare.com).
+
 
 ## Customization
 
