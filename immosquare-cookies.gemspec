@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.name          = "immosquare-cookies"
-  spec.version       = "0.1.3"
+  spec.version       = ImmosquareCookies::VERSION
   spec.authors       = ["IMMO SQUARE"]
   spec.email         = ["jules@immosquare.com"]
 
