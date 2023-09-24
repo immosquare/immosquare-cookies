@@ -1,7 +1,9 @@
+require_relative "lib/immosquare-cookies/version"
+
 Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.name          = "immosquare-cookies"
-  spec.version       = ImmosquareCookies::VERSION
+  spec.version       = ImmosquareCookies::VERSION.dup
   spec.authors       = ["IMMO SQUARE"]
   spec.email         = ["jules@immosquare.com"]
 
@@ -11,8 +13,6 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/IMMOSQUARE/immosquare-cookies"
   
   spec.files         = Dir["{app,config,db,lib}/**/*"]
-  spec.bindir        = "exe"
-  spec.executables   = []
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
