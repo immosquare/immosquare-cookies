@@ -1,12 +1,16 @@
 ## [Unreleased]
 
+## [0.1.4] - 2023-09-22
+
+- Add default text color
+
 ## [0.1.3] - 2023-09-22
 
-- Adding new locales : en, es, it, nl, zh
+- Add new locales : en, es, it, nl, zh
 
 ## [0.1.2] - 2023-09-22
 
-- Adding transparency to background-color
+- Add transparency to background-color
 
 ## [0.1.1] - 2023-09-22
 
