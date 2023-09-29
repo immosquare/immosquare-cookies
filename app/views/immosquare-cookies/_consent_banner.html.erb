@@ -1,15 +1,15 @@
 <% cookie_name = defined?(key) ? key : "_immosquare_consented" %>
 
 <%# DIV %>
-<%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name} ) do %>
+<%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name}) do %>
   <section>
     <%# Title %>
     <%= content_tag(:div, defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), :id => "immosquare-cookies-title") %>
 
     <%# Refuse/Accept %>
     <div id="immosquare-cookies-actions">
-      <%= content_tag(:div, defined?(refuse) ? refuse : t("immosquare-cookies.refuse"), :id => "immosquare-cookies-refuse")  %>
-      <%= content_tag(:div, defined?(accept) ? accept : t("immosquare-cookies.accept"), :id => "immosquare-cookies-accept")  %>
+      <%= content_tag(:div, defined?(refuse) ? refuse : t("immosquare-cookies.refuse"), :id => "immosquare-cookies-refuse") %>
+      <%= content_tag(:div, defined?(accept) ? accept : t("immosquare-cookies.accept"), :id => "immosquare-cookies-accept") %>
     </div>
 
     <%# Content %>
@@ -17,7 +17,7 @@
       <%= content_tag(:span,  defined?(text).present? ? text : t("immosquare-cookies.text")) %>
       <% if defined?(link) %>
         <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :style => "margin-right:4px;") %>
-        <%= link_to( defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank")   %>
+        <%= link_to(defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank") %>
       <% end %>
     </div>
   </section>
