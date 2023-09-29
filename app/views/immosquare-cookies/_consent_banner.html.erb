@@ -14,7 +14,7 @@
 
     <%# Content %>
     <div>
-      <%= content_tag(:span,  defined?(text).present? ? text : t("immosquare-cookies.text")) %>
+      <%= content_tag(:span,  (defined?(text).present? ? text : t("immosquare-cookies.text")).html_safe) %>
       <% if defined?(link) %>
         <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :style => "margin-right:4px;") %>
         <%= link_to(defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank") %>

@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.5] - 2023-09-22
+
+- Change legals text
+
 ## [0.1.4] - 2023-09-22
 
 - Add default text color
