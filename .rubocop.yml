@@ -1,2 +1,0 @@
-inherit_gem:
-  immosquare-rubocop: rubocop.yml

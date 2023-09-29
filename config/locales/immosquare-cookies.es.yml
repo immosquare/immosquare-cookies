@@ -1,7 +1,7 @@
 es:
   immosquare-cookies:
-    document_name: "Política de privacidad."
-    text: "Nosotros y nuestros socios tecnológicos utilizamos cookies o rastreadores para almacenar y acceder a información en tu dispositivo. Estos datos nos ayudan a mejorar tu experiencia de usuario, medir la audiencia de nuestro sitio y facilitar la interacción con las redes sociales. Al continuar con tu navegación, aceptas el uso de estos rastreadores. Si no aceptas, algunas funciones del sitio podrían no operar como se esperaba. Puedes cambiar tus preferencias en cualquier momento a través de la configuración de tu navegador."
+    accept: Aceptar
+    document_name: Política de privacidad.
     link_text: "Más información:"
-    refuse: "Rechazar"
-    accept: "Aceptar"
+    refuse: Rechazar
+    text: Nosotros y nuestros socios tecnológicos utilizamos cookies o rastreadores para almacenar y acceder a información en tu dispositivo. Estos datos nos ayudan a mejorar tu experiencia de usuario, medir la audiencia de nuestro sitio y facilitar la interacción con las redes sociales. Al continuar con tu navegación, aceptas el uso de estos rastreadores. Si no aceptas, algunas funciones del sitio podrían no operar como se esperaba. Puedes cambiar tus preferencias en cualquier momento a través de la configuración de tu navegador.

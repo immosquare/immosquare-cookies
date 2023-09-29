@@ -1,7 +1,7 @@
 en:
   immosquare-cookies:
-    document_name: "Privacy Policy."
-    text: "We and our technology partners use cookies or trackers to store and access information on your device. These data help us to improve your user experience, measure the audience of our site, and facilitate interaction with social networks. By continuing your navigation, you agree to the use of these trackers. If you do not accept, some features of the site might not operate as expected. You can change your preferences at any time through your browser settings."
+    accept: Accept
+    document_name: Privacy Policy.
     link_text: "More information:"
-    refuse: "Decline"
-    accept: "Accept"
+    refuse: Decline
+    text: We and our technology partners use cookies or trackers to store and access information on your device. These data help us to improve your user experience, measure the audience of our site, and facilitate interaction with social networks. By continuing your navigation, you agree to the use of these trackers. If you do not accept, some features of the site might not operate as expected. You can change your preferences at any time through your browser settings.
