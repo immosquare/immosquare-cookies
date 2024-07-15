@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.6] - 2024-07-15
+
+- Improve css to avoid sass DEPRECATION WARNING
+
 ## [0.1.5] - 2023-09-22
 
 - Change legals text
