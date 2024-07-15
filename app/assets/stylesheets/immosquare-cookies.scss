@@ -21,21 +21,24 @@
     }
   }
 
-  position: fixed;
-  z-index: 1000000;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  height: var(--immmosquare-cookies-height);
-  min-height: 200px;
-  color: var(--immosquare-cookies-color);
-  background-color: var(--immosquare-cookies-bg-color);
-  border-top: 1px solid var(--immosquare-cookies-border-color);
-  display: flex;
-  justify-content: center;
-  align-items: var(--immosquare-cookies-border-align);
-  padding: 1rem 3rem;
+  & {
+    position: fixed;
+    z-index: 1000000;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    height: var(--immmosquare-cookies-height);
+    min-height: 200px;
+    color: var(--immosquare-cookies-color);
+    background-color: var(--immosquare-cookies-bg-color);
+    border-top: 1px solid var(--immosquare-cookies-border-color);
+    display: flex;
+    justify-content: center;
+    align-items: var(--immosquare-cookies-border-align);
+    padding: 1rem 3rem;
+  }
+
   #immosquare-cookies-title {
     font-size: 1.5rem;
     font-weight: bold;
