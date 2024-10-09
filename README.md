@@ -1,4 +1,4 @@
-# IMMO SQUARE Cookies Consent Banner
+# immosquare Cookies Consent Banner
 Easily integrate a customizable cookie consent banner in your Ruby on Rails application.
 
 ## 🌍 Available Languages

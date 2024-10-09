@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.name          = "immosquare-cookies"
   spec.version       = ImmosquareCookies::VERSION.dup
-  spec.authors       = ["IMMO SQUARE"]
+  spec.authors       = ["immosquare"]
   spec.email         = ["jules@immosquare.com"]
 
   spec.summary       = "A customizable cookie consent banner for Rails applications."
