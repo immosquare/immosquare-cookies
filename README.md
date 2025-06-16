@@ -10,6 +10,7 @@ The gem is available in the following languages:
 - 🇳🇱 Dutch (nl)
 - 🇮🇹 Italian (it)
 - 🇨🇳 Simplified Chinese (zh)
+- 🇹🇼 Traditional Chinese (zh-TW)
 
 ---
 
@@ -116,7 +117,7 @@ In the example above, the Google Analytics script will only be loaded if the use
 ## 🎥 Demo
 
 For a visual demonstration, check out the image below or experience it firsthand by [visiting our website](https://immosquare.com).
-  
+
 ![Demo](demo.jpg)
 
 
