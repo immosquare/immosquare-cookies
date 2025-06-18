@@ -1,3 +1,6 @@
+## [0.1.7] - 2025-06-18
+- Add Traditional Chinese localization support
+
 ## [0.1.6] - 2024-07-15
 - Improve css to avoid sass DEPRECATION WARNING
 
