@@ -129,30 +129,23 @@ For a visual demonstration, check out the image below or experience it firsthand
 
 Customize the banner's appearance and text using these options:
 
-Option | Default | Description
-------|---------|------------
+| Option                 | Default                 | Description                                  |
+| ---------------------- | ----------------------- | -------------------------------------------- |
+| `:key`                 | "_immosquare_consented" | Cookie name storing the user's decision.     |
+| `:duration_months`     | 6                       | Duration in months for the consent cookie.   |
+| `:document_name`       | Localized string        | Title at the banner's top.                   |
+| `:site_name`           | `request.host`          | Site name displayed in the title.            |
+| `:refuse`              | Localized string        | "Refuse" button text.                        |
+| `:accept`              | Localized string        | "Accept" button text.                        |
+| `:text`                | Localized string        | Banner's content text.                       |
+| `:privacy_policy_link` | nil                     | URL for the privacy policy document.         |
+| `:cookie_policy_link`  | nil                     | URL for the cookie policy document.          |
+| `:privacy_policy`      | Localized string        | Custom text for privacy policy link.         |
+| `:cookie_policy`       | Localized string        | Custom text for cookie policy link.          |
+| `:link_text`           | Localized string        | Text displayed before the links.             |
+| `:target`              | "_blank"                | Link's target, e.g., "_blank" for a new tab. |
 
-`:key`| "_immosquare_consented" | Cookie name storing the user's decision.
-`:duration_months` | 6 | Duration in months for the consent cookie.
-`:document_name` | Localized string | Title at the banner's top.
-`:site_name` | `request.host` | Site name displayed in the title.
-`:refuse` | Localized string | "Refuse" button text.
-`:accept` | Localized string | "Accept" button text.
-`:text` | Localized string | Banner's content text.
-`:privacy_policy_link` | - | URL for the privacy policy document.
-`:cookie_policy_link` | - | URL for the cookie policy document.
-`:privacy_policy` | Localized string | Custom text for privacy policy link.
-`:cookie_policy` | Localized string | Custom text for cookie policy link.
-`:link_text` | Localized string | Text displayed before the links.
-`:target` | "_blank" | Link's target, e.g., "_blank" for a new tab.
 
-### Backward Compatibility
-
-The gem maintains full backward compatibility with the old `:link` parameter:
-
-```ruby
-<%= render("immosquare-cookies/consent_banner", :link => "https://legals.immosquare.com") %>
-```
 
 ### Example with Custom Links
 
