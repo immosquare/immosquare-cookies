@@ -7,4 +7,4 @@ fr:
     link_text: "Pour en savoir plus :"
     privacy_policy: Politique de confidentialité.
     refuse: Refuser
-    text: Bienvenue ! Ce site utilise des cookies pour mesurer la fréquentation du site afin d'en améliorer le fonctionnement et l'administration et, avec votre accord, pour évaluer la performance et améliorer votre expérience utilisateur. Nous conservons votre choix pendant 6 mois.
+    text: Bienvenue ! Ce site utilise des cookies pour mesurer la fréquentation du site afin d'en améliorer le fonctionnement et l'administration et, avec votre accord, pour évaluer la performance et améliorer votre expérience utilisateur. Nous conservons votre choix pendant %{duration_months} mois.

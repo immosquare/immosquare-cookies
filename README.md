@@ -185,7 +185,7 @@ The default keys used by the gem are:
 - `immosquare-cookies.document_title`
 - `immosquare-cookies.refuse`
 - `immosquare-cookies.accept`
-- `immosquare-cookies.text`
+- `immosquare-cookies.text` (supports `%{duration_months}` interpolation)
 - `immosquare-cookies.link_text`
 - `immosquare-cookies.privacy_policy`
 - `immosquare-cookies.cookie_policy`

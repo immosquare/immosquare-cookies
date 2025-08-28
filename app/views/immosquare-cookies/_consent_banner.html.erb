@@ -1,8 +1,7 @@
-<% 
-cookie_name     = defined?(key) ? key : "_immosquare_consented" 
+<%
+cookie_name     = defined?(key) ? key : "_immosquare_consented"
 duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 12) ? duration_months.to_i : 6
 %>
-
 
 <%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name}) do %>
   <div class="immosquare-cookies-banner">
@@ -13,7 +12,7 @@ duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 
       <%# Content %>
       <div class="immosquare-cookies-content">
         <div class="immosquare-cookies-text">
-          <%= content_tag(:div, (defined?(text).present? ? text : t("immosquare-cookies.text")).html_safe) %>
+          <%= content_tag(:div, (defined?(text).present? ? text : t("immosquare-cookies.text", :duration_months => duration_months)).html_safe) %>
           <% if defined?(link) %>
             <%# Backward compatibility with the :link parameter %>
             <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :class => "immosquare-cookies-link-text") %>

@@ -1,4 +1,4 @@
-en:
+n:
   immosquare-cookies:
     accept: Accept
     cookie_policy: Cookie Policy.
@@ -7,4 +7,4 @@ en:
     link_text: "More information:"
     privacy_policy: Privacy Policy.
     refuse: Decline
-    text: With your consent, we and our partners use cookies or similar technologies to store, access and process personal data such as your visits to this website, IP addresses and cookie identifiers. You can revoke your consent at any time.<br>Together with our partners, we process the following data:<br>Precise geolocation data and identification through device analysis, audience data and product development, Store and/or access to information on a terminal.
+    text: Welcome! This site uses cookies to measure site traffic in order to improve its operation and administration and, with your consent, to evaluate performance and improve your user experience. We keep your choice for %{duration_months} months.
