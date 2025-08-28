@@ -1,9 +1,14 @@
 <%
-cookie_name     = defined?(key) ? key : "_immosquare_consented"
-duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 12) ? duration_months.to_i : 6
+cookie_name       = defined?(key) ? key : "_immosquare_consented"
+duration_months   = defined?(duration_months) && duration_months.to_i.between?(1, 12) ? duration_months.to_i : 6
+cookies_to_remove = [] if !defined?(cookies_to_remove)
 %>
 
-<%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name}) do %>
+<%= content_tag(:div, :id => "immosquare-cookies-container", :data => {
+      :name              => cookie_name,
+      :duration_months   => duration_months,
+      :cookies_to_remove => cookies_to_remove
+    }) do %>
   <div class="immosquare-cookies-banner">
     <div class="immosquare-cookies-card">
       <%# Header %>
@@ -13,16 +18,10 @@ duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 
       <div class="immosquare-cookies-content">
         <div class="immosquare-cookies-text">
           <%= content_tag(:div, (defined?(text).present? ? text : t("immosquare-cookies.text", :duration_months => duration_months)).html_safe) %>
-          <% if defined?(link) %>
-            <%# Backward compatibility with the :link parameter %>
-            <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :class => "immosquare-cookies-link-text") %>
-            <%= link_to(defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") %>
-
-          <% elsif defined?(privacy_policy_link) || defined?(cookie_policy_link) %>
-            <%# New parameters for the two separated links %>
+          <% if defined?(privacy_policy_link) || defined?(cookie_policy_link) %>
             <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :class => "immosquare-cookies-link-text") %>
             <%= link_to(defined?(privacy_policy) ? privacy_policy : t("immosquare-cookies.privacy_policy"), privacy_policy_link, :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") if defined?(privacy_policy_link) %>
-            <%= link_to(defined?(cookie_policy) ? cookie_policy : t("immosquare-cookies.cookie_policy"), cookie_policy_link,     :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") if defined?(cookie_policy_link) %>
+            <%= link_to(defined?(cookie_policy) ? cookie_policy : t("immosquare-cookies.cookie_policy"),    cookie_policy_link,  :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") if defined?(cookie_policy_link) %>
           <% end %>
         </div>
       </div>
@@ -36,25 +35,58 @@ duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const cookieContainer      = document.getElementById("immosquare-cookies-container");
-    const cookieName           = cookieContainer.dataset.name;
-    const cookieDurationMonths = <%= duration_months %>;
-    const handleCookieConsent  = (consentGiven) => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const cookieContainer      = document.getElementById("immosquare-cookies-container");
+      const cookieName           = cookieContainer.dataset.name;
+      const cookieDurationMonths = cookieContainer.dataset.durationMonths;
+      const cookiesToRemove      = cookieContainer.dataset.cookiesToRemove;
+      const cookies              = document.cookie.split(";");
+
+      // Handle the cookie consent
+      const handleCookieConsent  = (consentGiven) => {
         cookieContainer.style.display = "none";
-        const date = new Date();
-        date.setTime(date.getTime() + (cookieDurationMonths * 30 * 24 * 60 * 60 * 1000));
-        const expires = `;expires=${date.toUTCString()}`;
-        if(!consentGiven){
-          document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+        const expiresString = new Date(Date.now() + cookieDurationMonths * 30 * 24 * 60 * 60 * 1000).toUTCString();
+
+        // Set the cookie for the consent banner
+        document.cookie = `${cookieName}=${consentGiven};expires=${expiresString}; path=/`;
+
+        // Disable the cookies that are not necessary if the user does not consent
+        if(!consentGiven && cookiesToRemove && cookiesToRemove.length > 0){
+          cookies.forEach(cookie => {
+            const cookieParts        = cookie.split("=");
+            const currentCookieName  = cookieParts[0].trim();
+            const currentCookieValue = cookieParts[1] ? cookieParts[1].trim() : '';
+
+            if(cookiesToRemove.includes(currentCookieName)){
+              // Delete the cookie by expiring it with both expires and Max-Age
+              const expiredDate = 'Thu, 01 Jan 1970 00:00:00 GMT';
+              const hostParts = window.location.hostname.split('.');
+
+              // Build domain variations to try
+              const domainVariations = [
+                ''  // Current domain (no domain attribute)
+              ];
+
+              if (hostParts.length >= 2) {
+                domainVariations.push('.' + hostParts.slice(-2).join('.')); // .example.com
+              }
+
+              if (hostParts.length >= 3) {
+                domainVariations.push('.' + hostParts.slice(-3).join('.')); // .example.co.uk
+              }
+
+              // Try to delete cookie with each domain variation
+              domainVariations.forEach(domain => {
+                const domainAttr = domain ? `; domain=${domain}` : '';
+                document.cookie = `${currentCookieName}=; expires=${expiredDate}; Max-Age=0; path=/${domainAttr}`;
+              });
+            }
+          })
         }
-        document.cookie = `${cookieName}=${consentGiven}${expires}; path=/`;
-        if(!consentGiven){
-          window.location.reload();
-        }
-    };
-    document.getElementById("immosquare-cookies-refuse").addEventListener("click", function() { handleCookieConsent(false); });
-    document.getElementById("immosquare-cookies-accept").addEventListener("click", function() { handleCookieConsent(true); });
+      };
+
+      document.getElementById("immosquare-cookies-refuse").addEventListener("click", function() { handleCookieConsent(false); });
+      document.getElementById("immosquare-cookies-accept").addEventListener("click", function() { handleCookieConsent(true); });
     });
   </script>
 <% end if cookies && cookies[cookie_name].blank? %>
