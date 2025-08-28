@@ -1,3 +1,29 @@
+## [2.0.0] - 2025-01-01
+
+### Breaking Changes
+- **BREAKING**: Removed `link` parameter, replaced with `privacy_policy_link` and `cookie_policy_link`
+- **BREAKING**: Complete CSS redesign with new modern aesthetics
+- **BREAKING**: New responsive breakpoints and layout changes
+
+### New Features
+- **Smart Cookie Management**: Added `cookies_to_remove` parameter to automatically remove specified cookies when consent is refused
+- **Enhanced Domain Support**: Cookie removal now works with complex domains (.co.uk, .gouv.fr, etc.)
+- **Improved Browser Compatibility**: Uses both `expires` and `Max-Age=0` for reliable cookie removal
+- **Better JSON Parsing**: Fixed array parameter handling in JavaScript
+- **Modern Responsive Design**: Complete visual overhaul with card-based layout and subtle shadows
+
+### Technical Improvements
+- Fixed critical bug in JSON parsing for `cookies_to_remove` array
+- Enhanced cookie cleanup with multiple domain variations
+- Improved accessibility and mobile experience
+- Zero external JavaScript dependencies
+- CSS custom properties for easy theming
+
+### Migration
+- See [docs/2.0-Upgrade.md](docs/2.0-Upgrade.md) for complete migration guide
+- Update `link:` parameter to `privacy_policy_link:` and `cookie_policy_link:`
+- Review custom CSS overrides due to design changes
+
 ## [0.1.8] - 2025-08-28
 - Update design for consent banner
 - add new variables : duration_months & privacy_policy_link & cookie_policy_link

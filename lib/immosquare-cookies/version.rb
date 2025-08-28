@@ -1,3 +1,3 @@
 module ImmosquareCookies
-  VERSION = "0.1.8".freeze
+  VERSION = "2.0.0".freeze
 end
