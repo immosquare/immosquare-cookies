@@ -132,6 +132,7 @@ Option | Default | Description
 ------|---------|------------
 
 `:key`| "_immosquare_consented" | Cookie name storing the user's decision.
+`:duration_months` | 6 | Duration in months for the consent cookie.
 `:document_name` | Localized string | Title at the banner's top.
 `:site_name` | `request.host` | Site name displayed in the title.
 `:refuse` | Localized string | "Refuse" button text.
@@ -159,6 +160,7 @@ The gem maintains full backward compatibility with the old `:link` parameter:
     :site_name           => "MyWebsite.com",
     :privacy_policy_link => "https://mywebsite.com/legal/privacy",
     :cookie_policy_link  => "https://mywebsite.com/legal/cookies",
+    :duration_months     => 6,
     target: "_blank") %>
 ```
 
