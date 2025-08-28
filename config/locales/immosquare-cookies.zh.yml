@@ -1,7 +1,9 @@
 zh:
   immosquare-cookies:
     accept: 接受
+    cookie_policy: Cookie 政策
     document_name: 隐私政策。
+    document_title: 關於 %{site_name} 的 Cookie
     link_text: 更多信息：
     refuse: 拒绝
     text: 经您同意，我们和我们的合作伙伴使用 cookie 或类似技术来存储、访问和处理个人数据 例如您对本网站的访问、IP 地址和 cookie 标识符。 您可以随时撤销您的同意。<br>与我们的合作伙伴一起，我们处理以下数据：<br>通过设备分析、受众数据和产品开发进行精确的地理位置数据和识别，存储和/或访问有关信息的信息终端。

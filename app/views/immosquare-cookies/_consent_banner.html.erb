@@ -1,26 +1,37 @@
 <% cookie_name = defined?(key) ? key : "_immosquare_consented" %>
 
-<%# DIV %>
 <%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name}) do %>
-  <section>
-    <%# Title %>
-    <%= content_tag(:div, defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), :id => "immosquare-cookies-title") %>
+  <div class="immosquare-cookies-banner">
+    <div class="immosquare-cookies-card">
+      <%# Header %>
+      <%= content_tag(:div, t("immosquare-cookies.document_title", :site_name => defined?(site_name) ? site_name : request.host), :class => "immosquare-cookies-header") %>
 
-    <%# Refuse/Accept %>
-    <div id="immosquare-cookies-actions">
-      <%= content_tag(:div, defined?(refuse) ? refuse : t("immosquare-cookies.refuse"), :id => "immosquare-cookies-refuse") %>
-      <%= content_tag(:div, defined?(accept) ? accept : t("immosquare-cookies.accept"), :id => "immosquare-cookies-accept") %>
-    </div>
+      <%# Content %>
+      <div class="immosquare-cookies-content">
+        <div class="immosquare-cookies-text">
+          <%= content_tag(:div, (defined?(text).present? ? text : t("immosquare-cookies.text")).html_safe) %>
+          <% if defined?(link) %>
+            <%# Backward compatibility with the :link parameter %>
+            <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :class => "immosquare-cookies-link-text") %>
+            <%= link_to(defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") %>
 
-    <%# Content %>
-    <div>
-      <%= content_tag(:span,  (defined?(text).present? ? text : t("immosquare-cookies.text")).html_safe) %>
-      <% if defined?(link) %>
-        <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :style => "margin-right:4px;") %>
-        <%= link_to(defined?(document_name) ? document_name : t("immosquare-cookies.document_name"), link, :target => defined?(target) ? target : "_blank") %>
-      <% end %>
+          <% elsif defined?(privacy_policy_link) || defined?(cookie_policy_link) %>
+            <%# New parameters for the two separated links %>
+            <%= content_tag(:span, defined?(link_text) ? link_text : t("immosquare-cookies.link_text"), :class => "immosquare-cookies-link-text") %>
+            <%= link_to(defined?(privacy_policy) ? privacy_policy : t("immosquare-cookies.privacy_policy"), privacy_policy_link, :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") if defined?(privacy_policy_link) %>
+            <%= link_to(defined?(cookie_policy) ? cookie_policy : t("immosquare-cookies.cookie_policy"), cookie_policy_link,     :target => defined?(target) ? target : "_blank", :class => "immosquare-cookies-link") if defined?(cookie_policy_link) %>
+          <% end %>
+        </div>
+      </div>
+
+      <%# Actions %>
+      <div class="immosquare-cookies-actions">
+        <%= content_tag(:button, defined?(refuse) ? refuse : t("immosquare-cookies.refuse"), :type => "button", :id => "immosquare-cookies-refuse", :class => "immosquare-cookies-btn") %>
+        <%= content_tag(:button, defined?(accept) ? accept : t("immosquare-cookies.accept"), :type => "button", :id => "immosquare-cookies-accept", :class => "immosquare-cookies-btn") %>
+      </div>
     </div>
-  </section>
+  </div>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
     const cookieContainer = document.getElementById("immosquare-cookies-container");

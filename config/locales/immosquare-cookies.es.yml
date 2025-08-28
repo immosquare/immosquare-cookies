@@ -1,7 +1,10 @@
 es:
   immosquare-cookies:
     accept: Aceptar
+    cookie_policy: Política de cookies.
     document_name: Política de privacidad.
+    document_title: Sobre cookies en %{site_name}
     link_text: "Más información:"
+    privacy_policy: Política de privacidad.
     refuse: Rechazar
     text: Con su consentimiento, nosotros y nuestros socios utilizamos cookies o tecnologías similares para almacenar, acceder y procesar datos personales como sus visitas a este sitio web, direcciones IP e identificadores de cookies. Puede revocar su consentimiento en cualquier momento.<br>Junto con nuestros socios, procesamos los siguientes datos:<br>Datos de geolocalización precisos e identificación a través del análisis de dispositivos, datos de audiencia y desarrollo de productos, Almacenar y/o acceder a información en un Terminal.

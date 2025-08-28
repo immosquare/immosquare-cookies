@@ -1,7 +1,10 @@
 fr:
   immosquare-cookies:
     accept: Accepter
+    cookie_policy: Politique des cookies.
     document_name: Politique de confidentialité.
-    link_text: "Plus d'informations :"
+    document_title: À propos des cookies sur %{site_name}
+    link_text: "Pour en savoir plus :"
+    privacy_policy: Politique de confidentialité.
     refuse: Refuser
-    text: Avec votre consentement, nous et nos partenaires utilisons les cookies ou des technologies similaires pour stocker, accéder à et traiter des données personnelles telles que vos visites à ce site Web, les adresses IP et les identifiants des cookies. Vous pouvez révoquer votre consentement à tout moment.<br>Avec nos partenaires, nous traitons les données suivantes :<br>Données de géolocalisation précises et identification par analyse du terminal, données d'audience et développement de produit, Stocker et/ou accéder à des informations sur un terminal.
+    text: Bienvenue ! Ce site utilise des cookies pour mesurer la fréquentation du site afin d'en améliorer le fonctionnement et l'administration et, avec votre accord, pour évaluer la performance et améliorer votre expérience utilisateur. Nous conservons votre choix pendant 6 mois.
