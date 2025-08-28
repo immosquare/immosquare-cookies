@@ -1,3 +1,6 @@
+## [0.1.7] - 2025-08-28
+- Update style, text and readme for consent banner
+
 ## [0.1.7] - 2025-06-18
 - Add Traditional Chinese localization support
 
