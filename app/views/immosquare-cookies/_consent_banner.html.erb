@@ -1,5 +1,8 @@
-<% cookie_name = defined?(key) ? key : "_immosquare_consented" %>
-<% duration_months = 6 unless defined?(duration_months) %>
+<% 
+cookie_name     = defined?(key) ? key : "_immosquare_consented" 
+duration_months = defined?(duration_months) && duration_months.to_i.between?(1, 12) ? duration_months.to_i : 6
+%>
+
 
 <%= content_tag(:div, :id => "immosquare-cookies-container", :data => {:name =>  cookie_name}) do %>
   <div class="immosquare-cookies-banner">
@@ -35,10 +38,10 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-    const cookieContainer = document.getElementById("immosquare-cookies-container");
-    const cookieName = cookieContainer.dataset.name;
+    const cookieContainer      = document.getElementById("immosquare-cookies-container");
+    const cookieName           = cookieContainer.dataset.name;
     const cookieDurationMonths = <%= duration_months %>;
-    const handleCookieConsent = (consentGiven) => {
+    const handleCookieConsent  = (consentGiven) => {
         cookieContainer.style.display = "none";
         const date = new Date();
         date.setTime(date.getTime() + (cookieDurationMonths * 30 * 24 * 60 * 60 * 1000));
