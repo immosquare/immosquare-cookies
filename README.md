@@ -1,9 +1,157 @@
-# immosquare Cookies Consent Banner
-Easily integrate a customizable cookie consent banner in your Ruby on Rails application.
+# 🍪 immosquare-cookies
 
-## 🌍 Available Languages
+**A modern, GDPR-compliant cookie consent banner for Rails applications**
 
-The gem is available in the following languages:
+
+Easily integrate a customizable, fully-featured cookie consent banner in your Ruby on Rails application. Built with modern web standards, responsive design, and complete GDPR compliance in mind.
+
+![Demo](docs/demo.png)
+
+## ✨ Features
+
+- 🌍 **Multi-language support** - 7 languages built-in (FR, EN, ES, NL, IT, ZH, ZH-TW)
+- 🎨 **Modern responsive design** - Clean, accessible UI that works on all devices
+- 🍪 **Smart cookie management** - Automatically remove specific cookies when consent is refused
+- ⚙️ **Highly customizable** - Customize text, links, duration, and appearance
+- 🚀 **Zero dependencies** - Pure JavaScript, no external libraries required
+- 📱 **Mobile optimized** - Touch-friendly interface with responsive breakpoints
+
+## 🚀 Quick Start
+
+Add to your `Gemfile`:
+
+```ruby
+gem "immosquare-cookies"
+```
+
+Run:
+
+```bash
+bundle install
+```
+
+Add to your layout or view:
+
+```erb
+<%= render("immosquare-cookies/consent_banner") %>
+```
+
+## 📦 Installation
+
+### Rails 6+ with modern bundling
+
+For modern Rails applications using `cssbundling-rails` or similar:
+
+1. Add the following to your `package.json` scripts:
+
+```json
+{
+  "scripts": {
+    "build:css": "ruby scripts/compile_sass.rb",
+    "build:css-dev": "ruby scripts/compile_sass.rb development"
+  }
+}
+```
+
+2. Create `scripts/compile_sass.rb`:
+
+```ruby
+#!/usr/bin/env ruby
+
+require_relative "../config/environment"
+
+cmd = "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css #{Rails.application.config.assets.paths.map {|path| "--load-path=#{path}" }.join(" ")}"
+cmd += ARGV[0] == "development" ? " --source-map --source-map-urls=absolute --watch" : " --style compressed"
+
+system(cmd)
+```
+
+3. Update your `Procfile.dev`:
+
+```
+web: bin/rails server -p 3000
+css: bun run build:css-dev
+js: bun run build-dev --watch
+```
+
+
+## 🎯 Usage
+
+### Basic usage
+
+```erb
+<%= render("immosquare-cookies/consent_banner") %>
+```
+
+### With privacy and cookie policy links
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    privacy_policy_link: "https://example.com/privacy",
+    cookie_policy_link: "https://example.com/cookies") %>
+```
+
+### Advanced usage with cookie management
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    site_name: "MyApp",
+    duration_months: 12,
+    privacy_policy_link: "https://example.com/privacy",
+    cookie_policy_link: "https://example.com/cookies",
+    cookies_to_remove: ["_ga", "_gid", "_fbp", "_gat"],
+    target: "_blank") %>
+```
+
+## 🍪 Smart Cookie Management
+
+**New in v2.0!** The `cookies_to_remove` parameter automatically removes unwanted cookies when users refuse consent.
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    cookies_to_remove: ["_ga", "_gid", "_fbp", "_gat_UA-*"]) %>
+```
+
+This prevents tracking cookies from being recreated and ensures true GDPR compliance.
+
+### Conditional script loading
+
+Check consent before loading tracking scripts:
+
+```erb
+<% if cookies["_immosquare_consented"] != "false" %>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+<% end %>
+```
+
+## ⚙️ Configuration Options
+
+| Parameter             | Type    | Default                   | Description                          |
+| --------------------- | ------- | ------------------------- | ------------------------------------ |
+| `key`                 | String  | `"_immosquare_consented"` | Cookie name storing consent decision |
+| `duration_months`     | Integer | `6`                       | Cookie duration (1-12 months)        |
+| `site_name`           | String  | `request.host`            | Site name in banner title            |
+| `text`                | String  | Localized                 | Custom banner text                   |
+| `privacy_policy_link` | String  | `nil`                     | URL to privacy policy                |
+| `cookie_policy_link`  | String  | `nil`                     | URL to cookie policy                 |
+| `cookies_to_remove`   | Array   | `[]`                      | Cookies to remove on refusal         |
+| `refuse`              | String  | Localized                 | "Refuse" button text                 |
+| `accept`              | String  | Localized                 | "Accept" button text                 |
+| `link_text`           | String  | Localized                 | Text before policy links             |
+| `privacy_policy`      | String  | Localized                 | Privacy policy link text             |
+| `cookie_policy`       | String  | Localized                 | Cookie policy link text              |
+| `target`              | String  | `"_blank"`                | Link target attribute                |
+
+## 🌍 Internationalization
+
+Built-in translations for 7 languages:
 - 🇫🇷 French (fr)
 - 🇬🇧 English (en)
 - 🇪🇸 Spanish (es)
@@ -12,186 +160,103 @@ The gem is available in the following languages:
 - 🇨🇳 Simplified Chinese (zh)
 - 🇹🇼 Traditional Chinese (zh-TW)
 
----
+### Translation keys
 
-## 🚀 Installation
+Customize translations in your app's locale files:
 
-Ensure you have the compatible versions of Ruby and Rails before installation.
-
-Add the following line to your `Gemfile`:
-
-```bash
-gem "immosquare-cookies"
+```yaml
+en:
+  immosquare-cookies:
+    document_title: "Cookie Settings for %{site_name}"
+    text: "We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies for %{duration_months} months."
+    refuse: "Refuse"
+    accept: "Accept"
+    link_text: "Learn more:"
+    privacy_policy: "Privacy Policy"
+    cookie_policy: "Cookie Policy"
 ```
 
-Then run:
+## 🎨 Styling & Design
 
-```bash
-bundle install
-```
+The banner features a modern, accessible design with:
 
----
+- **Clean card-based layout** with subtle shadows
+- **Responsive breakpoints** for mobile and desktop
+- **CSS custom properties** for easy theming
+- **Smooth animations** and hover effects
+- **Fixed bottom-left positioning** (non-intrusive)
 
-## 🎨 Styles Integration
+### Custom styling
 
-For proper styling, include the `immosquare-cookies.scss` stylesheet. Depending on your Rails version, the way to include it varies:
-
-### Rails 5
-
-Add to your application's CSS manifest (usually `application.css`):
+Override CSS custom properties:
 
 ```css
-*= require immosquare-cookies
+#immosquare-cookies-container {
+  --immosquare-cookies-color: #your-brand-color;
+  --immosquare-cookies-bg: #your-background;
+  --immosquare-cookies-border: #your-border-color;
 
-```
-
-### Rails 6 and Above
-
-Make sure that SASS has access to all of Rails' assets (`Rails.application.config.assets`). Set it up using [cssbundling-rails](https://github.com/rails/cssbundling-rails):
-
-1. In the script section of `package.json`, invoke:
-
-```json
-"scripts": {
-    ...
-    "build:css": "ruby datas/compile_sass.rb",
-    "build:css-dev": "ruby datas/compile_sass.rb development"
 }
 ```
 
-2. Place the Ruby script, `data/compile_sass.rb`, in the appropriate directory:
+## 🚀 Upgrading to v2.0
 
-```ruby
-#!/usr/bin/env ruby
+immosquare-cookies v2.0 includes breaking changes and major improvements.
 
-# Require the environment to have access to the application's constants.
-require_relative "../config/environment"
+**📖 [View complete migration guide →](docs/2.0-Upgrade.md)**
 
-# Create the command to execute with all the application's paths (gems, node_modules, etc.)
-cmd = "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css #{Rails.application.config.assets.paths.map {|path| "--load-path=#{path}" }.join(" ")}"
-cmd += ARGV[0] == "development" ? " --source-map --source-map-urls=absolute --watch" : " --style compressed"
+### Quick migration checklist:
 
-# Execute the command.
-system(cmd)
-```
+- [ ] Update gem version: `gem "immosquare-cookies", "~> 2.0"`
+- [ ] Replace `link:` parameter with `privacy_policy_link:` and `cookie_policy_link:`
+- [ ] Test banner display and functionality
+- [ ] Add `cookies_to_remove:` for automatic GDPR compliance
 
-3. Update your `Procfile`:
+## 💡 Examples
 
-```plaintext
-puma:     bundle exec puma -C config/puma/development.rb
-sidekiq:  bundle exec sidekiq -e development
-css:      bun build:css-dev
-js:       bun build-dev --watch
-```
-
----
-
-## 🛠 Usage
-
-Display the consent banner by adding to your application layout or specific view:
-
-```ruby
-<%= render("immosquare-cookies/consent_banner") %>
-```
-
-Or with custom links:
-
-```ruby
-<%= render("immosquare-cookies/consent_banner",
-    :duration_months     => 3,
-    :privacy_policy_link => "https://example.com/privacy",
-    :cookie_policy_link  => "https://example.com/cookies") %>
-```
-
----
-
-## 🍪 Conditional Script Loading based on Cookie Consent
-
-If a user has refused the cookie, you might choose not to load certain scripts, such as those from Google Analytics. Here's a simple example using Rails' ERB template:
+### E-commerce site with Google Analytics
 
 ```erb
-<% if cookies["_immosquare_consented"] != "false" %>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-AAAAAAAA"></script>
-<% end %>
-```
-
-In the example above, the Google Analytics script will only be loaded if the user has not explicitly refused the cookies.
-
-
-## 🎥 Demo
-
-For a visual demonstration, check out the image below or experience it firsthand by [visiting our website](https://immosquare.com).
-
-![Demo](demo.jpg)
-
-
-## Customization
-
-Customize the banner's appearance and text using these options:
-
-| Option                 | Default                 | Description                                  |
-| ---------------------- | ----------------------- | -------------------------------------------- |
-| `:key`                 | "_immosquare_consented" | Cookie name storing the user's decision.     |
-| `:duration_months`     | 6                       | Duration in months for the consent cookie.   |
-| `:document_name`       | Localized string        | Title at the banner's top.                   |
-| `:site_name`           | `request.host`          | Site name displayed in the title.            |
-| `:refuse`              | Localized string        | "Refuse" button text.                        |
-| `:accept`              | Localized string        | "Accept" button text.                        |
-| `:text`                | Localized string        | Banner's content text.                       |
-| `:privacy_policy_link` | nil                     | URL for the privacy policy document.         |
-| `:cookie_policy_link`  | nil                     | URL for the cookie policy document.          |
-| `:privacy_policy`      | Localized string        | Custom text for privacy policy link.         |
-| `:cookie_policy`       | Localized string        | Custom text for cookie policy link.          |
-| `:link_text`           | Localized string        | Text displayed before the links.             |
-| `:target`              | "_blank"                | Link's target, e.g., "_blank" for a new tab. |
-
-
-
-### Example with Custom Links
-
-```ruby
 <%= render("immosquare-cookies/consent_banner",
-    :site_name           => "MyWebsite.com",
-    :privacy_policy_link => "https://mywebsite.com/legal/privacy",
-    :cookie_policy_link  => "https://mywebsite.com/legal/cookies",
-    :duration_months     => 6,
-    target: "_blank") %>
+    site_name: "MyShop",
+    duration_months: 6,
+    privacy_policy_link: "https://myshop.com/privacy",
+    cookie_policy_link: "https://myshop.com/cookies",
+    cookies_to_remove: ["_ga", "_gid", "_gat", "_fbp"]) %>
 ```
 
+### SaaS application
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    site_name: "MySaaS Pro",
+    duration_months: 12,
+    text: "We use essential and analytics cookies to improve your experience.",
+    privacy_policy_link: "https://mysaas.com/legal/privacy",
+    cookies_to_remove: ["_ga", "_gid", "intercom-session"]) %>
+```
+
+## 🔧 Development
+
+```bash
+# Clone the repository
+git clone https://github.com/immosquare/immosquare-cookies.git
+
+# Build the gem
+gem build immosquare-cookies.gemspec
+
+# Install locally
+gem install immosquare-cookies-2.0.0.gem
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) for details.
+
+## 🤝 Contributing
+
+Bug reports and pull requests are welcome on [GitHub](https://github.com/immosquare/immosquare-cookies).
+
 ---
 
-## Styling
-
-The gem includes its own CSS. The banner uses a clean, modern design with:
-
-- **Position**: Fixed at bottom-left
-- **Responsive**: Adapts to mobile screens
-- **Typography**: Clean, readable fonts
-
----
-
-## Internationalization
-
-This gem is i18n-ready. If you don't pass custom text, it will use default translations. Customize translations by adding the appropriate keys to your app's localization files.
-
-The default keys used by the gem are:
-
-- `immosquare-cookies.document_title`
-- `immosquare-cookies.refuse`
-- `immosquare-cookies.accept`
-- `immosquare-cookies.text` (supports `%{duration_months}` interpolation)
-- `immosquare-cookies.link_text`
-- `immosquare-cookies.privacy_policy`
-- `immosquare-cookies.cookie_policy`
-
----
-
-## Support & Contribution
-
-For bugs or feature requests, open an issue on [GitHub](https://github.com/immosquare/immosquare-cookies).
-
----
-
-## License
-
-This gem is under the [MIT License](https://opensource.org/licenses/MIT).
+Made with ❤️ by the [immosquare](https://immosquare.com) team

@@ -39,7 +39,7 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
       const cookieContainer      = document.getElementById("immosquare-cookies-container");
       const cookieName           = cookieContainer.dataset.name;
       const cookieDurationMonths = cookieContainer.dataset.durationMonths;
-      const cookiesToRemove      = cookieContainer.dataset.cookiesToRemove;
+      const cookiesToRemove      = cookieContainer.dataset.cookiesToRemove ? JSON.parse(cookieContainer.dataset.cookiesToRemove) : [];
       const cookies              = document.cookie.split(";");
 
       // Handle the cookie consent

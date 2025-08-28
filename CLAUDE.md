@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Ruby gem called `immosquare-cookies` that provides a customizable GDPR-compliant cookie consent banner for Rails applications. It's designed as a Rails Engine that integrates seamlessly into existing Rails applications.
+This is a Ruby gem called `immosquare-cookies` v2.0.0 that provides a modern, customizable GDPR-compliant cookie consent banner for Rails applications. It's designed as a Rails Engine with advanced cookie management capabilities and a modern responsive design.
 
 ## Architecture
 
@@ -12,7 +12,7 @@ The gem follows the standard Rails Engine pattern:
 
 - **Engine**: `lib/immosquare-cookies/engine.rb` - Main Rails Engine class
 - **Main Module**: `lib/immosquare-cookies.rb` - Entry point that loads the engine
-- **Version**: `lib/immosquare-cookies/version.rb` - Gem version (currently 0.1.8)
+- **Version**: `lib/immosquare-cookies/version.rb` - Gem version (currently 2.0.0)
 - **View Partial**: `app/views/immosquare-cookies/_consent_banner.html.erb` - The main cookie banner template
 - **Stylesheet**: `app/assets/stylesheets/immosquare-cookies.scss` - Banner styling with CSS custom properties
 - **Localization**: `config/locales/` - Translation files for 7 languages (en, fr, es, it, nl, zh, zh-TW)
@@ -21,10 +21,12 @@ The gem follows the standard Rails Engine pattern:
 
 ### Cookie Banner (`_consent_banner.html.erb`)
 - Renders a fixed-position banner at bottom-left of screen
-- Configurable options: duration, links, text, styling
-- JavaScript handles user consent and cookie management
+- **Smart cookie management**: Automatically removes specified cookies when consent is refused
+- Configurable options: duration, links, text, styling, cookies to remove
+- JavaScript handles user consent and advanced cookie cleanup
 - Shows only when consent cookie is not set
-- Supports custom privacy policy and cookie policy links
+- Supports separate privacy policy and cookie policy links
+- JSON parsing for `cookies_to_remove` array parameter
 
 ### Styling (`immosquare-cookies.scss`)
 - Uses CSS custom properties for theming
@@ -90,7 +92,13 @@ The banner accepts these parameters:
 - `site_name`: Display name (default: request.host)
 - `text`, `refuse`, `accept`: Custom button/text labels
 - `privacy_policy_link`, `cookie_policy_link`: External links
+- `cookies_to_remove`: Array of cookie names to remove on refusal (default: [])
 - `target`: Link target (default: "_blank")
+
+### Breaking Changes in v2.0.0
+- `link` parameter removed → replaced with `privacy_policy_link` and `cookie_policy_link`
+- Complete design overhaul with new CSS
+- New `cookies_to_remove` functionality for automatic cookie cleanup
 
 ## Important Notes
 
