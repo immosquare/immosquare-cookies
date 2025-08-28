@@ -1,3 +1,7 @@
+## [0.1.8] - 2025-08-28
+- Update design for consent banner
+- add new variables : duration_months & privacy_policy_link & cookie_policy_link
+
 ## [0.1.7] - 2025-08-28
 - Update style, text and readme for consent banner
 

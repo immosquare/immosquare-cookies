@@ -98,6 +98,7 @@ Or with custom links:
 
 ```ruby
 <%= render("immosquare-cookies/consent_banner",
+    :duration_months     => 3,
     :privacy_policy_link => "https://example.com/privacy",
     :cookie_policy_link  => "https://example.com/cookies") %>
 ```
