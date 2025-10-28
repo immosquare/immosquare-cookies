@@ -1,3 +1,6 @@
+# [2.0.0] - 2025-10-28
+- update sass function for sass 3.x compatilibty
+
 ## [2.0.0] - 2025-01-01
 
 ### Breaking Changes
