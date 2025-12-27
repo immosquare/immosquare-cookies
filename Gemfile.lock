@@ -49,7 +49,7 @@ GEM
       smart_properties
     erubi (1.13.1)
     htmlbeautifier (1.4.3)
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     immosquare-cleaner (0.1.96)
       erb_lint (>= 0.7, <= 1000.0)
@@ -69,15 +69,19 @@ GEM
     loofah (2.25.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    minitest (6.0.0)
+    mini_portile2 (2.8.9)
+    minitest (6.0.1)
       prism (~> 1.5)
+    nokogiri (1.18.10)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.18.10-arm64-darwin)
       racc (~> 1.4)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    prism (1.6.0)
+    prism (1.7.0)
     racc (1.8.1)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
@@ -87,10 +91,10 @@ GEM
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     rainbow (3.1.1)
-    rbs (3.9.5)
+    rbs (3.10.0)
       logger
     regexp_parser (2.11.3)
-    rubocop (1.82.0)
+    rubocop (1.82.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -122,6 +126,7 @@ GEM
 PLATFORMS
   arm64-darwin-23
   arm64-darwin-24
+  arm64-darwin-25
 
 DEPENDENCIES
   immosquare-cleaner
@@ -129,4 +134,4 @@ DEPENDENCIES
   ruby-lsp
 
 BUNDLED WITH
-  4.0.2
+  4.0.3
