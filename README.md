@@ -16,18 +16,10 @@ Easily integrate a customizable, fully-featured cookie consent banner in your Ru
 - 🚀 **Zero dependencies** - Pure JavaScript, no external libraries required
 - 📱 **Mobile optimized** - Touch-friendly interface with responsive breakpoints
 
-## 🚀 Quick Start
-
-Add to your `Gemfile`:
+## Quick Start
 
 ```ruby
 gem "immosquare-cookies"
-```
-
-Run:
-
-```bash
-bundle install
 ```
 
 Add to your layout or view:
