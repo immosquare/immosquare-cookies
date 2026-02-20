@@ -35,7 +35,11 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    // Using an IIFE instead of DOMContentLoaded for Turbo Drive compatibility.
+    // Turbo replaces the <body> on navigation without firing DOMContentLoaded again.
+    // Since this partial is conditionally rendered server-side, the inline script
+    // executes immediately each time Turbo inserts it into the DOM.
+    (() => {
       const cookieContainer      = document.getElementById("immosquare-cookies-container");
       const cookieName           = cookieContainer.dataset.name;
       const cookieDurationMonths = cookieContainer.dataset.durationMonths;
@@ -87,6 +91,6 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
 
       document.getElementById("immosquare-cookies-refuse").addEventListener("click", function() { handleCookieConsent(false); });
       document.getElementById("immosquare-cookies-accept").addEventListener("click", function() { handleCookieConsent(true); });
-    });
+    })();
   </script>
 <% end if cookies && cookies[cookie_name].blank? %>

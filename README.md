@@ -13,6 +13,7 @@ Easily integrate a customizable, fully-featured cookie consent banner in your Ru
 - 🍪 **Smart cookie management** - Automatically remove specific cookies when consent is refused
 - ⚙️ **Highly customizable** - Customize text, links, duration, and appearance
 - 🚀 **Zero dependencies** - Pure JavaScript, no external libraries required
+- ⚡ **Turbo Drive compatible** - Works seamlessly with Hotwire/Turbo navigation
 - 📱 **Mobile optimized** - Touch-friendly interface with responsive breakpoints
 
 ## Quick Start
