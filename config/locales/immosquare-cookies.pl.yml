@@ -1,0 +1,10 @@
+pl:
+  immosquare-cookies:
+    accept: Akceptuj
+    cookie_policy: Polityka plików cookie.
+    document_name: Polityka prywatności.
+    document_title: Informacje o plikach cookie w serwisie %{site_name}
+    link_text: "Więcej informacji:"
+    privacy_policy: Polityka prywatności.
+    refuse: Odrzuć
+    text: Witamy! Ta strona wykorzystuje pliki cookie do pomiaru ruchu w celu poprawy jej działania i zarządzania oraz, za Twoją zgodą, do analizy wydajności i ulepszania korzystania z serwisu. Twój wybór przechowujemy przez %{duration_months} miesięcy.
