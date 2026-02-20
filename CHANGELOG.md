@@ -1,3 +1,8 @@
+## [2.0.3] - 2026-02-20
+
+### Fixed
+- Turbo Drive compatibility: replace `DOMContentLoaded` with IIFE ([#2](https://github.com/immosquare/immosquare-cookies/issues/2))
+
 ## [2.0.2] - 2026-02-20
 
 ### Added
