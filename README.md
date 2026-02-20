@@ -2,14 +2,13 @@
 
 **A modern, GDPR-compliant cookie consent banner for Rails applications**
 
-
 Easily integrate a customizable, fully-featured cookie consent banner in your Ruby on Rails application. Built with modern web standards, responsive design, and complete GDPR compliance in mind.
 
 ![Demo](docs/demo.png)
 
 ## ✨ Features
 
-- 🌍 **Multi-language support** - 7 languages built-in (FR, EN, ES, NL, IT, ZH, ZH-TW)
+- 🌍 **Multi-language support** - 8 languages built-in (FR, EN, ES, NL, PL, IT, ZH, ZH-TW)
 - 🎨 **Modern responsive design** - Clean, accessible UI that works on all devices
 - 🍪 **Smart cookie management** - Automatically remove specific cookies when consent is refused
 - ⚙️ **Highly customizable** - Customize text, links, duration, and appearance
@@ -65,7 +64,6 @@ web: bin/rails server -p 3000
 css: bun run build:css-dev
 js: bun run build-dev --watch
 ```
-
 
 ## 🎯 Usage
 
@@ -125,6 +123,7 @@ Check consent before loading tracking scripts:
 
 ## ⚙️ Configuration Options
 
+
 | Parameter             | Type    | Default                   | Description                          |
 | --------------------- | ------- | ------------------------- | ------------------------------------ |
 | `key`                 | String  | `"_immosquare_consented"` | Cookie name storing consent decision |
@@ -143,11 +142,13 @@ Check consent before loading tracking scripts:
 
 ## 🌍 Internationalization
 
-Built-in translations for 7 languages:
+Built-in translations for 8 languages:
+
 - 🇫🇷 French (fr)
 - 🇬🇧 English (en)
 - 🇪🇸 Spanish (es)
 - 🇳🇱 Dutch (nl)
+- 🇵🇱 Polish (pl)
 - 🇮🇹 Italian (it)
 - 🇨🇳 Simplified Chinese (zh)
 - 🇹🇼 Traditional Chinese (zh-TW)
@@ -199,10 +200,10 @@ immosquare-cookies v2.0 includes breaking changes and major improvements.
 
 ### Quick migration checklist:
 
-- [ ] Update gem version: `gem "immosquare-cookies", "~> 2.0"`
-- [ ] Replace `link:` parameter with `privacy_policy_link:` and `cookie_policy_link:`
-- [ ] Test banner display and functionality
-- [ ] Add `cookies_to_remove:` for automatic GDPR compliance
+- [ ]  Update gem version: `gem "immosquare-cookies", "~> 2.0"`
+- [ ]  Replace `link:` parameter with `privacy_policy_link:` and `cookie_policy_link:`
+- [ ]  Test banner display and functionality
+- [ ]  Add `cookies_to_remove:` for automatic GDPR compliance
 
 ## 💡 Examples
 
