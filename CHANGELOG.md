@@ -1,3 +1,14 @@
+## [2.0.2] - 2026-02-20
+
+### Added
+- Polish locale support
+
+### Changed
+- Migrated to Ruby 4.0.x compatibility
+
+### Fixed
+- Typo in English locale
+
 # [2.0.0] - 2025-10-28
 - update sass function for sass 3.x compatilibty
 

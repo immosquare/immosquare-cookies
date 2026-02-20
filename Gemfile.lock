@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    immosquare-cookies (2.0.1)
+    immosquare-cookies (2.0.2)
 
 GEM
   remote: https://rubygems.org/
