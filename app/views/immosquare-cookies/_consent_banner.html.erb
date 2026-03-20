@@ -54,6 +54,12 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
         // Set the cookie for the consent banner
         document.cookie = `${cookieName}=${consentGiven};expires=${expiresString}; path=/`;
 
+        // Google Consent Mode update
+        if (typeof gtag === "function") {
+          const state = consentGiven ? "granted" : "denied";
+          gtag("consent", "update", {"analytics_storage": state, "ad_storage": state, "ad_user_data": state, "ad_personalization": state});
+        }
+
         // Disable the cookies that are not necessary if the user does not consent
         if(!consentGiven && cookiesToRemove && cookiesToRemove.length > 0){
           cookies.forEach(cookie => {
