@@ -1,12 +1,9 @@
-@use "sass:color";
-
 #immosquare-cookies-container {
   --immosquare-cookies-color: #004b99;
+  --immosquare-cookies-color-hover: color-mix(in srgb, var(--immosquare-cookies-color), black 10%);
   --immosquare-cookies-bg: #f8f9fa;
   --immosquare-cookies-border: #dee2e6;
   --immosquare-cookies-text: #6c757d;
-  --immosquare-cookies-primary: #0d6efd;
-  --immosquare-cookies-secondary: #6c757d;
   --immosquare-cookies-btn-color: white;
 }
 
@@ -58,7 +55,7 @@
   font-weight: 700;
 
   &:hover {
-    color: color.adjust(#004b99, $lightness: -10%);
+    color: var(--immosquare-cookies-color-hover);
     text-decoration: underline;
   }
 }
@@ -91,15 +88,15 @@
     box-shadow 0.15s ease-in-out;
 
   &:hover {
-    background-color: color.adjust(#004b99, $lightness: -10%);
-    border-color: color.adjust(#004b99, $lightness: -10%);
+    background-color: var(--immosquare-cookies-color-hover);
+    border-color: var(--immosquare-cookies-color-hover);
     color: var(--immosquare-cookies-btn-color);
     text-decoration: none;
   }
 
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--immosquare-cookies-color), transparent 75%);
   }
 }
 

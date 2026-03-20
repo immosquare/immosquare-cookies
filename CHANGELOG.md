@@ -20,7 +20,6 @@
 
 ### Changed
 - **SCSS**: migrated to the new Sass module API (`@use "sass:color"` + `color.adjust()` instead of `darken()`) for Sass 3.x / Dart Sass 2.0 compatibility
-- ⚠️ **Impact**: requires a Sass compiler supporting `@use` (Dart Sass ≥ 1.23.0). Projects using the legacy Ruby Sass or LibSass compilers should stay on `< 2.0.1`
 
 ## [2.0.0] - 2025-08-28
 
