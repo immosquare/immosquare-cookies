@@ -1,52 +1,44 @@
 ## [2.0.4] - 2026-03-20
 
 ### Added
-- Google Consent Mode v2 support: pushes `gtag('consent', 'update', ...)` on accept/refuse with the 4 required signals (`analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization`)
+- Google Consent Mode v2: calls `gtag('consent', 'update', ...)` on accept/refuse with the 4 required signals (`analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization`)
 
 ## [2.0.3] - 2026-02-20
 
 ### Fixed
-- Turbo Drive compatibility: replace `DOMContentLoaded` with IIFE ([#2](https://github.com/immosquare/immosquare-cookies/issues/2))
+- Turbo Drive compatibility: replaced `DOMContentLoaded` with an IIFE (Turbo replaces the `<body>` without re-firing the event)
 
 ## [2.0.2] - 2026-02-20
 
 ### Added
-- Polish locale support
-
-### Changed
-- Migrated to Ruby 4.0.x compatibility
+- Polish locale (`pl`)
 
 ### Fixed
-- Typo in English locale
+- **Critical fix**: typo in `immosquare-cookies.en.yml` (`n:` → `en:`) — English locale was broken since 2.0.0
 
-# [2.0.0] - 2025-10-28
-- update sass function for sass 3.x compatilibty
+## [2.0.1] - 2025-10-28
 
-## [2.0.0] - 2025-01-01
+### Changed
+- **SCSS**: migrated to the new Sass module API (`@use "sass:color"` + `color.adjust()` instead of `darken()`) for Sass 3.x / Dart Sass 2.0 compatibility
+- ⚠️ **Impact**: requires a Sass compiler supporting `@use` (Dart Sass ≥ 1.23.0). Projects using the legacy Ruby Sass or LibSass compilers should stay on `< 2.0.1`
+
+## [2.0.0] - 2025-08-28
 
 ### Breaking Changes
-- **BREAKING**: Removed `link` parameter, replaced with `privacy_policy_link` and `cookie_policy_link`
-- **BREAKING**: Complete CSS redesign with new modern aesthetics
-- **BREAKING**: New responsive breakpoints and layout changes
+- Removed `link` parameter, replaced by `privacy_policy_link` and `cookie_policy_link`
+- Complete CSS redesign with modern card-based layout and shadows
+- New responsive breakpoints
 
-### New Features
-- **Smart Cookie Management**: Added `cookies_to_remove` parameter to automatically remove specified cookies when consent is refused
-- **Enhanced Domain Support**: Cookie removal now works with complex domains (.co.uk, .gouv.fr, etc.)
-- **Improved Browser Compatibility**: Uses both `expires` and `Max-Age=0` for reliable cookie removal
-- **Better JSON Parsing**: Fixed array parameter handling in JavaScript
-- **Modern Responsive Design**: Complete visual overhaul with card-based layout and subtle shadows
-
-### Technical Improvements
-- Fixed critical bug in JSON parsing for `cookies_to_remove` array
-- Enhanced cookie cleanup with multiple domain variations
-- Improved accessibility and mobile experience
-- Zero external JavaScript dependencies
+### Added
+- `cookies_to_remove` parameter to automatically delete specified cookies on refuse
+- Complex domain support (.co.uk, .gouv.fr, etc.) for cookie removal
+- Dual removal via `expires` and `Max-Age=0` for browser compatibility
+- Fixed JSON parsing of the `cookies_to_remove` array in JavaScript
 - CSS custom properties for easy theming
 
 ### Migration
-- See [docs/2.0-Upgrade.md](docs/2.0-Upgrade.md) for complete migration guide
-- Update `link:` parameter to `privacy_policy_link:` and `cookie_policy_link:`
-- Review custom CSS overrides due to design changes
+- Replace `link:` with `privacy_policy_link:` and `cookie_policy_link:`
+- Review custom CSS overrides (classes and structure changed)
 
 ## [0.1.8] - 2025-08-28
 - Update design for consent banner
