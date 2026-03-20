@@ -1,3 +1,8 @@
+## [2.0.4] - 2026-03-20
+
+### Added
+- Google Consent Mode v2 support: pushes `gtag('consent', 'update', ...)` on accept/refuse with the 4 required signals (`analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization`)
+
 ## [2.0.3] - 2026-02-20
 
 ### Fixed
