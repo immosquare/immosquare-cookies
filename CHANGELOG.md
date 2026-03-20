@@ -1,3 +1,9 @@
+## [2.0.5] - 2026-03-20
+
+### Changed
+- **SCSS**: replaced Sass `color.adjust()` with native CSS `color-mix()`, removing the Dart Sass compiler requirement
+- Removed unused CSS custom properties (`--immosquare-cookies-primary`, `--immosquare-cookies-secondary`)
+
 ## [2.0.4] - 2026-03-20
 
 ### Added
