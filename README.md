@@ -11,6 +11,7 @@ Easily integrate a customizable, fully-featured cookie consent banner in your Ru
 - 🌍 **Multi-language support** - 8 languages built-in (FR, EN, ES, NL, PL, IT, ZH, ZH-TW)
 - 🎨 **Modern responsive design** - Clean, accessible UI that works on all devices
 - 🍪 **Smart cookie management** - Automatically remove specific cookies when consent is refused
+- 📊 **Google Consent Mode v2** - Calls `gtag('consent', 'update', ...)` on accept/refuse with the 4 required signals
 - ⚙️ **Highly customizable** - Customize text, links, duration, and appearance
 - 🚀 **Zero dependencies** - Pure JavaScript, no external libraries required
 - ⚡ **Turbo Drive compatible** - Works seamlessly with Hotwire/Turbo navigation
@@ -105,6 +106,21 @@ js: bun run build-dev --watch
 
 This prevents tracking cookies from being recreated and ensures true GDPR compliance.
 
+## 📊 Google Consent Mode v2
+
+**New in v2.0.4!** When the user clicks accept or refuse, the banner automatically updates the Google Consent Mode v2 signals if `gtag` is defined on the page:
+
+```js
+gtag("consent", "update", {
+  analytics_storage:  "granted" | "denied",
+  ad_storage:         "granted" | "denied",
+  ad_user_data:       "granted" | "denied",
+  ad_personalization: "granted" | "denied"
+})
+```
+
+No configuration required — the integration is triggered as soon as `gtag` is available. Declare the Google tag (gtag.js) on the page **before** the banner renders so its default consent state can be picked up.
+
 ### Conditional script loading
 
 Check consent before loading tracking scripts:
@@ -186,10 +202,12 @@ Override CSS custom properties:
 
 ```css
 #immosquare-cookies-container {
-  --immosquare-cookies-color: #your-brand-color;
-  --immosquare-cookies-bg: #your-background;
-  --immosquare-cookies-border: #your-border-color;
-
+  --immosquare-cookies-color:       #your-brand-color;       /* Link + button background */
+  --immosquare-cookies-color-hover: #your-brand-hover-color; /* Defaults to color mixed with 10% black */
+  --immosquare-cookies-bg:          #your-background;        /* Card background */
+  --immosquare-cookies-border:      #your-border-color;      /* Card border */
+  --immosquare-cookies-text:        #your-text-color;        /* Body text */
+  --immosquare-cookies-btn-color:   #your-button-text-color; /* Button text */
 }
 ```
 
@@ -239,8 +257,8 @@ git clone https://github.com/immosquare/immosquare-cookies.git
 # Build the gem
 gem build immosquare-cookies.gemspec
 
-# Install locally
-gem install immosquare-cookies-2.0.0.gem
+# Install locally (replace <version> with the version printed by `gem build`)
+gem install immosquare-cookies-<version>.gem
 ```
 
 ## 📄 License
