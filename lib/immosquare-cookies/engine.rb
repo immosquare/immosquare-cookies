@@ -1,3 +1,5 @@
+require "rails/engine"
+
 module ImmosquareCookies
   class Engine < ::Rails::Engine
 
