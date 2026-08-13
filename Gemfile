@@ -9,3 +9,14 @@ group :development do
   ##============================================================##
   gem "ruby-lsp"
 end
+
+##============================================================##
+## Anything the specs need belongs here and not in :development,
+## which the CI skips (cf. bin/ci).
+##============================================================##
+group :test do
+  gem "activesupport"
+  gem "rspec"
+  gem "simplecov",      :require => false
+  gem "simplecov-lcov", :require => false
+end
