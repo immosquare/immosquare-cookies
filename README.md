@@ -1,3 +1,10 @@
+---
+locale: en
+tags:
+  - app:immosquare-cookies
+  - audience:technique
+---
+
 # 🍪 immosquare-cookies
 
 **A modern, GDPR-compliant cookie consent banner for Rails applications**
