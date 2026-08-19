@@ -20,7 +20,7 @@ Easily integrate a customizable, fully-featured cookie consent banner in your Ru
 - 🍪 **Smart cookie management** - Automatically remove specific cookies when consent is refused
 - 📊 **Google Consent Mode v2** - Calls `gtag('consent', 'update', ...)` on accept/refuse with the 4 required signals
 - ⚙️ **Highly customizable** - Customize text, links, duration, and appearance
-- 🚀 **Zero dependencies** - Pure JavaScript, no external libraries required
+- 🚀 **Zero front-end dependencies** - Pure JavaScript, no external libraries required
 - ⚡ **Turbo Drive compatible** - Works seamlessly with Hotwire/Turbo navigation
 - 📱 **Mobile optimized** - Touch-friendly interface with responsive breakpoints
 
@@ -37,6 +37,15 @@ Add to your layout or view:
 ```
 
 ## 📦 Installation
+
+### Requirements
+
+| Requirement | Version    |
+| ----------- | ---------- |
+| Ruby        | `>= 2.6.0` |
+| `railties`  | `>= 6.0`   |
+
+`railties` is the only runtime dependency: the gem ships a `Rails::Engine` so its views, stylesheet and locales are picked up by the host application automatically.
 
 ### Rails 6+ with modern bundling
 
@@ -74,6 +83,14 @@ css: bun run build:css-dev
 js: bun run build-dev --watch
 ```
 
+4. Import the banner stylesheet in `app/assets/stylesheets/application.sass.scss`:
+
+```scss
+@import "immosquare-cookies";
+```
+
+The engine adds its own `app/assets/stylesheets` to `Rails.application.config.assets.paths`, which the script above turns into `--load-path` flags — that is what makes the bare `immosquare-cookies` name resolve.
+
 ## 🎯 Usage
 
 ### Basic usage
@@ -108,8 +125,10 @@ js: bun run build-dev --watch
 
 ```erb
 <%= render("immosquare-cookies/consent_banner",
-    cookies_to_remove: ["_ga", "_gid", "_fbp", "_gat_UA-*"]) %>
+    cookies_to_remove: ["_ga", "_gid", "_fbp", "_gat"]) %>
 ```
+
+Names are matched **exactly** — wildcards and prefixes are not supported, so list every cookie you want removed. Each one is expired on the current domain, on `.example.com` and on `.example.co.uk`, with both `expires` and `Max-Age=0`, so it is removed whichever way it was set.
 
 This prevents tracking cookies from being recreated and ensures true GDPR compliance.
 
@@ -184,14 +203,16 @@ Customize translations in your app's locale files:
 ```yaml
 en:
   immosquare-cookies:
-    document_title: "Cookie Settings for %{site_name}"
-    text: "We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies for %{duration_months} months."
-    refuse: "Refuse"
+    document_title: "About cookies on %{site_name}"
+    text: "Welcome! This site uses cookies to measure site traffic in order to improve its operation and administration and, with your consent, to evaluate performance and improve your user experience. We keep your choice for %{duration_months} months."
     accept: "Accept"
-    link_text: "Learn more:"
-    privacy_policy: "Privacy Policy"
-    cookie_policy: "Cookie Policy"
+    refuse: "Decline"
+    link_text: "More information:"
+    privacy_policy: "Privacy Policy."
+    cookie_policy: "Cookie Policy."
 ```
+
+`document_title` and `text` are the only keys taking an interpolation: `%{site_name}` and `%{duration_months}` respectively. Both come from the render parameters, so a translation that drops them silently loses the information.
 
 ## 🎨 Styling & Design
 
@@ -260,6 +281,8 @@ immosquare-cookies v2.0 includes breaking changes and major improvements.
 ```bash
 # Clone the repository
 git clone https://github.com/immosquare/immosquare-cookies.git
+cd immosquare-cookies
+bundle install
 
 # Build the gem
 gem build immosquare-cookies.gemspec
@@ -267,6 +290,31 @@ gem build immosquare-cookies.gemspec
 # Install locally (replace <version> with the version printed by `gem build`)
 gem install immosquare-cookies-<version>.gem
 ```
+
+### Running the tests
+
+The suite runs on RSpec. `.rspec` requires `coverage_helper` before `spec_helper`, so coverage sees the library being loaded rather than an already-required file.
+
+```bash
+bundle exec rspec
+```
+
+Coverage is opt-in through an environment variable, which keeps a local run fast and leaves no `coverage/` directory behind:
+
+```bash
+COVERAGE=true bundle exec rspec   # writes coverage/lcov.info and an HTML report
+```
+
+`bin/ci` is the entry point used by both a laptop and the build agent — everything agent-specific is skipped when `JENKINS_WORKSPACE` is unset:
+
+| Command       | What it does                                     |
+| ------------- | ------------------------------------------------ |
+| `bin/ci init` | `bundle install` without the `development` group |
+| `bin/ci test` | `bundle exec rspec`                              |
+
+Anything the specs need belongs to the `test` group of the `Gemfile`, never to `development`: the CI installs without that group, and a bundler asked to materialize a group it skipped aborts on `GemNotFound`.
+
+The `Jenkinsfile` chains the two commands and publishes `coverage/lcov.info` to the Jenkins coverage report. The Ruby it runs is the one pinned in `.ruby-version`, in the gemset named by `.ruby-gemset`.
 
 ## 📄 License
 
