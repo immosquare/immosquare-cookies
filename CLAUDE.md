@@ -24,4 +24,4 @@ lib/immosquare-cookies/version.rb                      # Constante VERSION
 
 - JavaScript inline dans l'ERB (zéro dépendance externe)
 - SCSS plat avec `color-mix()` natif CSS (pas de compilateur Dart Sass requis depuis 2.0.5)
-- Pas de tests (gem minimaliste)
+- Suite RSpec dans `spec/`, lancée par `bin/ci` (couverture SimpleCov + LCOV)

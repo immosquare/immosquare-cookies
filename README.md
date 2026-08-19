@@ -9,11 +9,13 @@ tags:
 
 **A modern, GDPR-compliant cookie consent banner for Rails applications**
 
-Easily integrate a customizable, fully-featured cookie consent banner in your Ruby on Rails application. Built with modern web standards, responsive design, and complete GDPR compliance in mind.
+Easily integrate a customizable, fully-featured cookie consent banner in your Ruby on Rails application. Built with modern web standards, responsive design, and complete GDPR compliance in mind. immosquare-cookies ships as a `Rails::Engine` for Rails 6+, so a host application adds the gem and renders a single partial. This page covers the installation of the gem, the parameters accepted when rendering the banner, the Google Consent Mode v2 integration, the built-in translations, the styling hooks, the upgrade from v1 to v2 and the development workflow of the gem itself.
 
 ![Demo](docs/demo.png)
 
-## ✨ Features
+## ✨ What the immosquare-cookies banner offers
+
+Out of the box, the consent banner provides:
 
 - 🌍 **Multi-language support** - 8 languages built-in (FR, EN, ES, NL, PL, IT, ZH, ZH-TW)
 - 🎨 **Modern responsive design** - Clean, accessible UI that works on all devices
@@ -24,30 +26,30 @@ Easily integrate a customizable, fully-featured cookie consent banner in your Ru
 - ⚡ **Turbo Drive compatible** - Works seamlessly with Hotwire/Turbo navigation
 - 📱 **Mobile optimized** - Touch-friendly interface with responsive breakpoints
 
-## Quick Start
+## 📦 Installing immosquare-cookies in a Rails application
+
+Add the gem to your `Gemfile`:
 
 ```ruby
 gem "immosquare-cookies"
 ```
 
-Add to your layout or view:
+Then render the banner partial from your layout or view:
 
 ```erb
 <%= render("immosquare-cookies/consent_banner") %>
 ```
 
-## 📦 Installation
+### Requirements of the immosquare-cookies gem
 
-### Requirements
+`railties` is the only runtime dependency: the gem ships a `Rails::Engine` so its views, stylesheet and locales are picked up by the host application automatically. The minimum versions are:
 
 | Requirement | Version    |
 | ----------- | ---------- |
 | Ruby        | `>= 2.6.0` |
 | `railties`  | `>= 6.0`   |
 
-`railties` is the only runtime dependency: the gem ships a `Rails::Engine` so its views, stylesheet and locales are picked up by the host application automatically.
-
-### Rails 6+ with modern bundling
+### Building the banner stylesheet with cssbundling-rails
 
 For modern Rails applications using `cssbundling-rails` or similar:
 
@@ -91,15 +93,15 @@ js: bun run build-dev --watch
 
 The engine adds its own `app/assets/stylesheets` to `Rails.application.config.assets.paths`, which the script above turns into `--load-path` flags — that is what makes the bare `immosquare-cookies` name resolve.
 
-## 🎯 Usage
+## 🎯 Rendering the consent banner and passing it parameters
 
-### Basic usage
+The banner is rendered by a single partial, with no parameter at all in its simplest form:
 
 ```erb
 <%= render("immosquare-cookies/consent_banner") %>
 ```
 
-### With privacy and cookie policy links
+With privacy and cookie policy links:
 
 ```erb
 <%= render("immosquare-cookies/consent_banner",
@@ -107,7 +109,7 @@ The engine adds its own `app/assets/stylesheets` to `Rails.application.config.as
     cookie_policy_link: "https://example.com/cookies") %>
 ```
 
-### Advanced usage with cookie management
+Advanced usage, combining the site name, the consent duration, both policy links, the cookies to remove and the link target:
 
 ```erb
 <%= render("immosquare-cookies/consent_banner",
@@ -119,7 +121,29 @@ The engine adds its own `app/assets/stylesheets` to `Rails.application.config.as
     target: "_blank") %>
 ```
 
-## 🍪 Smart Cookie Management
+An e-commerce site with Google Analytics:
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    site_name: "MyShop",
+    duration_months: 6,
+    privacy_policy_link: "https://myshop.com/privacy",
+    cookie_policy_link: "https://myshop.com/cookies",
+    cookies_to_remove: ["_ga", "_gid", "_gat", "_fbp"]) %>
+```
+
+A SaaS application:
+
+```erb
+<%= render("immosquare-cookies/consent_banner",
+    site_name: "MySaaS Pro",
+    duration_months: 12,
+    text: "We use essential and analytics cookies to improve your experience.",
+    privacy_policy_link: "https://mysaas.com/legal/privacy",
+    cookies_to_remove: ["_ga", "_gid", "intercom-session"]) %>
+```
+
+## 🍪 Removing tracking cookies on refusal with `cookies_to_remove`
 
 **New in v2.0!** The `cookies_to_remove` parameter automatically removes unwanted cookies when users refuse consent.
 
@@ -132,7 +156,7 @@ Names are matched **exactly** — wildcards and prefixes are not supported, so l
 
 This prevents tracking cookies from being recreated and ensures true GDPR compliance.
 
-## 📊 Google Consent Mode v2
+## 📊 Google Consent Mode v2 signals sent on accept and refuse
 
 **New in v2.0.4!** When the user clicks accept or refuse, the banner automatically updates the Google Consent Mode v2 signals if `gtag` is defined on the page:
 
@@ -147,9 +171,7 @@ gtag("consent", "update", {
 
 No configuration required — the integration is triggered as soon as `gtag` is available. Declare the Google tag (gtag.js) on the page **before** the banner renders so its default consent state can be picked up.
 
-### Conditional script loading
-
-Check consent before loading tracking scripts:
+Tracking scripts themselves can be loaded conditionally, by checking the consent cookie before they are inserted:
 
 ```erb
 <% if cookies["_immosquare_consented"] != "false" %>
@@ -164,8 +186,9 @@ Check consent before loading tracking scripts:
 <% end %>
 ```
 
-## ⚙️ Configuration Options
+## ⚙️ Reference — the render parameters of the consent banner
 
+Every parameter below is passed as a local when rendering `immosquare-cookies/consent_banner`, and every one of them is optional. A `Localized` default means the value comes from the built-in translations of the gem rather than from a hard-coded string.
 
 | Parameter             | Type    | Default                   | Description                          |
 | --------------------- | ------- | ------------------------- | ------------------------------------ |
@@ -183,9 +206,9 @@ Check consent before loading tracking scripts:
 | `cookie_policy`       | String  | Localized                 | Cookie policy link text              |
 | `target`              | String  | `"_blank"`                | Link target attribute                |
 
-## 🌍 Internationalization
+## 🌍 Built-in translations and the immosquare-cookies locale keys
 
-Built-in translations for 8 languages:
+The banner ships with translations for 8 languages:
 
 - 🇫🇷 French (fr)
 - 🇬🇧 English (en)
@@ -196,9 +219,7 @@ Built-in translations for 8 languages:
 - 🇨🇳 Simplified Chinese (zh)
 - 🇹🇼 Traditional Chinese (zh-TW)
 
-### Translation keys
-
-Customize translations in your app's locale files:
+Those translations are overridden by redefining the same keys in your own application locale files:
 
 ```yaml
 en:
@@ -214,9 +235,9 @@ en:
 
 `document_title` and `text` are the only keys taking an interpolation: `%{site_name}` and `%{duration_months}` respectively. Both come from the render parameters, so a translation that drops them silently loses the information.
 
-## 🎨 Styling & Design
+## 🎨 Styling the banner with CSS custom properties
 
-The banner features a modern, accessible design with:
+The immosquare-cookies banner features a modern, accessible design with:
 
 - **Clean card-based layout** with subtle shadows
 - **Responsive breakpoints** for mobile and desktop
@@ -224,9 +245,7 @@ The banner features a modern, accessible design with:
 - **Smooth animations** and hover effects
 - **Fixed bottom-left positioning** (non-intrusive)
 
-### Custom styling
-
-Override CSS custom properties:
+Theming the banner means overriding those CSS custom properties on its container:
 
 ```css
 #immosquare-cookies-container {
@@ -239,44 +258,22 @@ Override CSS custom properties:
 }
 ```
 
-## 🚀 Upgrading to v2.0
+## 🚀 Upgrading immosquare-cookies from v1 to v2
 
 immosquare-cookies v2.0 includes breaking changes and major improvements.
 
 **📖 [View complete migration guide →](docs/2.0-Upgrade.md)**
 
-### Quick migration checklist:
+Quick migration checklist:
 
 - [ ]  Update gem version: `gem "immosquare-cookies", "~> 2.0"`
 - [ ]  Replace `link:` parameter with `privacy_policy_link:` and `cookie_policy_link:`
 - [ ]  Test banner display and functionality
 - [ ]  Add `cookies_to_remove:` for automatic GDPR compliance
 
-## 💡 Examples
+## 🔧 Developing and testing the immosquare-cookies gem
 
-### E-commerce site with Google Analytics
-
-```erb
-<%= render("immosquare-cookies/consent_banner",
-    site_name: "MyShop",
-    duration_months: 6,
-    privacy_policy_link: "https://myshop.com/privacy",
-    cookie_policy_link: "https://myshop.com/cookies",
-    cookies_to_remove: ["_ga", "_gid", "_gat", "_fbp"]) %>
-```
-
-### SaaS application
-
-```erb
-<%= render("immosquare-cookies/consent_banner",
-    site_name: "MySaaS Pro",
-    duration_months: 12,
-    text: "We use essential and analytics cookies to improve your experience.",
-    privacy_policy_link: "https://mysaas.com/legal/privacy",
-    cookies_to_remove: ["_ga", "_gid", "intercom-session"]) %>
-```
-
-## 🔧 Development
+Working on the gem itself starts with a clone and a local build:
 
 ```bash
 # Clone the repository
@@ -291,9 +288,7 @@ gem build immosquare-cookies.gemspec
 gem install immosquare-cookies-<version>.gem
 ```
 
-### Running the tests
-
-The suite runs on RSpec. `.rspec` requires `coverage_helper` before `spec_helper`, so coverage sees the library being loaded rather than an already-required file.
+The test suite runs on RSpec. `.rspec` requires `coverage_helper` before `spec_helper`, so coverage sees the library being loaded rather than an already-required file.
 
 ```bash
 bundle exec rspec
@@ -305,7 +300,7 @@ Coverage is opt-in through an environment variable, which keeps a local run fast
 COVERAGE=true bundle exec rspec   # writes coverage/lcov.info and an HTML report
 ```
 
-`bin/ci` is the entry point used by both a laptop and the build agent — everything agent-specific is skipped when `JENKINS_WORKSPACE` is unset:
+`bin/ci` is the entry point used by both a laptop and the build agent — everything agent-specific is skipped when `JENKINS_WORKSPACE` is unset. It exposes two commands:
 
 | Command       | What it does                                     |
 | ------------- | ------------------------------------------------ |
@@ -316,13 +311,9 @@ Anything the specs need belongs to the `test` group of the `Gemfile`, never to `
 
 The `Jenkinsfile` chains the two commands and publishes `coverage/lcov.info` to the Jenkins coverage report. The Ruby it runs is the one pinned in `.ruby-version`, in the gemset named by `.ruby-gemset`.
 
-## 📄 License
+## 📄 License and contributing to immosquare-cookies
 
-This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) for details.
-
-## 🤝 Contributing
-
-Bug reports and pull requests are welcome on [GitHub](https://github.com/immosquare/immosquare-cookies).
+immosquare-cookies is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) for details. Bug reports and pull requests are welcome on [GitHub](https://github.com/immosquare/immosquare-cookies).
 
 ---
 
