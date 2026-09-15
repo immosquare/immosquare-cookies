@@ -300,16 +300,17 @@ Coverage is opt-in through an environment variable, which keeps a local run fast
 COVERAGE=true bundle exec rspec   # writes coverage/lcov.info and an HTML report
 ```
 
-`bin/ci` is the entry point used by both a laptop and the build agent — everything agent-specific is skipped when `JENKINS_WORKSPACE` is unset. It exposes two commands:
+`bin/ci` is the entry point used by both a laptop and the build agent — it provisions nothing itself, the CI runner selecting Ruby and the gemset beforehand. It exposes three commands:
 
 | Command       | What it does                                     |
 | ------------- | ------------------------------------------------ |
 | `bin/ci init` | `bundle install` without the `development` group |
 | `bin/ci test` | `bundle exec rspec`                              |
+| `bin/ci`      | Both, in that order (the default, `all`)         |
 
 Anything the specs need belongs to the `test` group of the `Gemfile`, never to `development`: the CI installs without that group, and a bundler asked to materialize a group it skipped aborts on `GemNotFound`.
 
-The `Jenkinsfile` chains the two commands and publishes `coverage/lcov.info` to the Jenkins coverage report. The Ruby it runs is the one pinned in `.ruby-version`, in the gemset named by `.ruby-gemset`.
+The script defaults `COVERAGE` to `true`, and the CI collects `coverage/lcov.info`. The Ruby it runs is the one pinned in `.ruby-version`, in the gemset named by `.ruby-gemset`.
 
 ## 📄 License and contributing to immosquare-cookies
 
