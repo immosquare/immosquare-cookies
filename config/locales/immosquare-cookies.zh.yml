@@ -5,5 +5,6 @@ zh:
     document_name: 隐私政策。
     document_title: 關於 %{site_name} 的 Cookie
     link_text: 更多信息：
+    privacy_policy: 隐私政策。
     refuse: 拒绝
     text: 欢迎！本网站使用 cookie 来测量网站流量，以改善其运营和管理，并在您同意的情况下，评估性能并改善您的用户体验。我们将您的选择保存 %{duration_months} 个月。

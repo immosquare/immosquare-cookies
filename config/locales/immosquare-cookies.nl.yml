@@ -5,5 +5,6 @@ nl:
     document_name: Privacybeleid.
     document_title: Over cookies op %{site_name}
     link_text: "Meer informatie:"
+    privacy_policy: Privacybeleid.
     refuse: Weigeren
     text: Welkom! Deze site gebruikt cookies om het siteverkeer te meten om de werking en het beheer ervan te verbeteren en, met uw toestemming, om de prestaties te evalueren en uw gebruikerservaring te verbeteren. We bewaren uw keuze gedurende %{duration_months} maanden.
