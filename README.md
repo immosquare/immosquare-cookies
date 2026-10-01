@@ -152,7 +152,7 @@ A SaaS application:
     cookies_to_remove: ["_ga", "_gid", "_fbp", "_gat"]) %>
 ```
 
-Names are matched **exactly** — wildcards and prefixes are not supported, so list every cookie you want removed. Each one is expired on the current domain, on `.example.com` and on `.example.co.uk`, with both `expires` and `Max-Age=0`, so it is removed whichever way it was set.
+Names are matched **exactly** — wildcards and prefixes are not supported, so list every cookie you want removed. A listed name is expired only when it is already present in `document.cookie` at the moment the banner script runs. The banner then writes the deletion with `expires` set to the epoch and `Max-Age=0`, on `path=/`: once with no `domain` attribute, once on the last two labels of the hostname when the host has at least two (`.example.com` on `www.example.com`), and once on the last three labels when the host has at least three (`.example.co.uk` on `example.co.uk`).
 
 This prevents tracking cookies from being recreated and ensures true GDPR compliance.
 
