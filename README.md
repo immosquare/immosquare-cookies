@@ -1,4 +1,6 @@
 ---
+created_at: "2023-09-22"
+updated_at: "2026-09-30"
 locale: en
 tags:
   - app:immosquare-cookies
