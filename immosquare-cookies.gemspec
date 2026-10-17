@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["{app,config,db,lib}/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.2.6")
 
   spec.add_dependency("railties", ">= 6.0", "< 1000.0")
 end
