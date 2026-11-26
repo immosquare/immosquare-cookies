@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    immosquare-cookies (2.0.5)
+    immosquare-cookies (2.0.6)
       railties (>= 6.0, < 1000.0)
 
 GEM

@@ -1,7 +1,11 @@
-## [Unreleased]
+## [2.0.6] - 2026-11-26
 
 ### Added
-- "Manage cookies" link: the banner is always rendered (hidden by the `hidden` attribute once a choice is stored) and any link to `#immosquare-cookies` reopens it, so a visitor can change their choice at any time.
+- **Banner**: "Manage cookies" link. The banner is always rendered (hidden by the `hidden` attribute once a choice is stored) and any link to `#immosquare-cookies` reopens it, so a visitor can change their choice at any time. Refusing after reopening also deletes the listed cookies set since page load.
+- **i18n**: `privacy_policy` translation for `nl`, `zh` and `zh-TW`
+
+### Changed
+- **gemspec**: requires Ruby >= 3.2.6 and declares the `railties` dependency
 
 ## [2.0.5] - 2026-03-20
 
