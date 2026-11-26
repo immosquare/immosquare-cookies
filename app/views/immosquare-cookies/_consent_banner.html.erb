@@ -2,9 +2,15 @@
 cookie_name       = defined?(key) ? key : "_immosquare_consented"
 duration_months   = defined?(duration_months) && duration_months.to_i.between?(1, 12) ? duration_months.to_i : 6
 cookies_to_remove = [] if !defined?(cookies_to_remove)
+##============================================================##
+## The banner is always rendered, hidden once a choice is stored, so
+## that a "Manage cookies" link can reopen it: any link to
+## `#immosquare-cookies` shows it again.
+##============================================================##
+consent_stored    = cookies.present? && cookies[cookie_name].present?
 %>
 
-<%= content_tag(:div, :id => "immosquare-cookies-container", :data => {
+<%= content_tag(:div, :id => "immosquare-cookies-container", :hidden => consent_stored, :data => {
       :name              => cookie_name,
       :duration_months   => duration_months,
       :cookies_to_remove => cookies_to_remove
@@ -37,18 +43,17 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
   <script>
     // Using an IIFE instead of DOMContentLoaded for Turbo Drive compatibility.
     // Turbo replaces the <body> on navigation without firing DOMContentLoaded again.
-    // Since this partial is conditionally rendered server-side, the inline script
-    // executes immediately each time Turbo inserts it into the DOM.
+    // The partial is rendered on every page (hidden once consent is stored), so the
+    // inline script executes each time Turbo inserts it into the DOM.
     (() => {
       const cookieContainer      = document.getElementById("immosquare-cookies-container");
       const cookieName           = cookieContainer.dataset.name;
       const cookieDurationMonths = cookieContainer.dataset.durationMonths;
       const cookiesToRemove      = cookieContainer.dataset.cookiesToRemove ? JSON.parse(cookieContainer.dataset.cookiesToRemove) : [];
-      const cookies              = document.cookie.split(";");
 
       // Handle the cookie consent
       const handleCookieConsent  = (consentGiven) => {
-        cookieContainer.style.display = "none";
+        cookieContainer.hidden = true;
         const expiresString = new Date(Date.now() + cookieDurationMonths * 30 * 24 * 60 * 60 * 1000).toUTCString();
 
         // Set the cookie for the consent banner
@@ -61,8 +66,10 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
         }
 
         // Disable the cookies that are not necessary if the user does not consent
+        // Read at refusal time: cookies set after page load (e.g. _ga after an
+        // earlier acceptance, before the banner is reopened) must be removed too.
         if(!consentGiven && cookiesToRemove && cookiesToRemove.length > 0){
-          cookies.forEach(cookie => {
+          document.cookie.split(";").forEach(cookie => {
             const cookieParts        = cookie.split("=");
             const currentCookieName  = cookieParts[0].trim();
             const currentCookieValue = cookieParts[1] ? cookieParts[1].trim() : '';
@@ -97,6 +104,29 @@ cookies_to_remove = [] if !defined?(cookies_to_remove)
 
       document.getElementById("immosquare-cookies-refuse").addEventListener("click", function() { handleCookieConsent(false); });
       document.getElementById("immosquare-cookies-accept").addEventListener("click", function() { handleCookieConsent(true); });
+
+      // Reopen the banner from any link to #immosquare-cookies ("Manage cookies").
+      // The listener lives on document, which Turbo keeps across navigations:
+      // registered once, it looks the container up again on each click.
+      if (!window.immosquareCookiesManageListener) {
+        window.immosquareCookiesManageListener = true;
+        document.addEventListener("click", (event) => {
+          const link      = event.target.closest("a[href$='#immosquare-cookies']");
+          const container = document.getElementById("immosquare-cookies-container");
+          if (!link || !container) return;
+
+          event.preventDefault();
+          container.hidden = false;
+          document.getElementById("immosquare-cookies-accept")?.focus();
+        });
+
+        // A banner reopened then left without a choice must not come back open
+        // from the browser back-forward cache while a choice is stored.
+        window.addEventListener("pagehide", () => {
+          const container = document.getElementById("immosquare-cookies-container");
+          if (container && document.cookie.split(";").some((cookie) => cookie.trim().startsWith(`${container.dataset.name}=`))) container.hidden = true;
+        });
+      }
     })();
   </script>
-<% end if cookies && cookies[cookie_name].blank? %>
+<% end if cookies %>

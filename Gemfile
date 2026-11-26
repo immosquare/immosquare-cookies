@@ -16,6 +16,11 @@ end
 ##============================================================##
 group :test do
   gem "activesupport"
+  ##============================================================##
+  ## Drives a headless Chrome so the specs run the banner's inline
+  ## JavaScript for real. The runner needs Chrome installed.
+  ##============================================================##
+  gem "ferrum"
   gem "rspec"
   gem "simplecov",      :require => false
   gem "simplecov-lcov", :require => false

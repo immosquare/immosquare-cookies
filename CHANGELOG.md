@@ -1,3 +1,8 @@
+## [Unreleased]
+
+### Added
+- "Manage cookies" link: the banner is always rendered (hidden by the `hidden` attribute once a choice is stored) and any link to `#immosquare-cookies` reopens it, so a visitor can change their choice at any time.
+
 ## [2.0.5] - 2026-03-20
 
 ### Changed
